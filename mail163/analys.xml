@@ -1,0 +1,10 @@
+get email info xml post:
+    var:
+    <?xml version="1.0"?><object><int name="fid">1</int><string name="order">date</string><boolean name="desc">true</boolean><int name="limit">20</int><int name="start">0</int><boolean name="skipLockedFolders">fals</boolean><string name="topFlag">top</string><boolean name="returnTag">true</boolean><boolean name="returnTotal">true</boolean></object>
+
+
+send email xml post:
+    var:
+    <?xml version="1.0"?><object><string name="id">c:1462487475453</string><object name="attrs"><string name="account">"vibiu003"&lt;vibiu003@163.com&gt;</string><boolean name="showOneRcpt">false</boolean><array name="to"><string>"vibiu007@163.com"&lt;vibiu007@163.com&gt;</string></array><array name="cc"/><array name="bcc"/><string name="subject">test send email</string><boolean name="isHtml">true</boolean><string name="content">&lt;div style="line-height:1.7;color:#000000;font-size:14px;font-family:Arial"&gt;I hope I can send this to you.&lt;br /&gt;&lt;/div&gt;</string><int name="priority">3</int><boolean name="saveSentCopy">true</boolean><string name="charset">GBK</string></object><boolean name="returnInfo">false</boolean><string name="action">deliver</string><int name="saveTextThreshold">1048576</int></object>
+    var:
+    <?xml version="1.0"?><object><string name="id">c:1462499061279</string><object name="attrs"><string name="account">"vibiu007"&lt;vibiu007@163.com&gt;</string><boolean name="showOneRcpt">false</boolean><array name="to"><string>"vibiu003@163.com"&lt;vibiu003@163.com&gt;</string></array><array name="cc"/><array name="bcc"/><string name="subject">do you recieve</string><boolean name="isHtml">true</boolean><string name="content">&lt;div style="line-height:1.7;color:#000000;font-size:14px;font-family:Arial"&gt;I have reply to you. If you can recieve, callback please&lt;/div&gt;</string><int name="priority">3</int><boolean name="saveSentCopy">true</boolean><string name="charset">GBK</string></object><boolean name="returnInfo">false</boolean><string name="action">deliver</string><int name="saveTextThreshold">1048576</int></object>

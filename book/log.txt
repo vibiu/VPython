@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>南昌大学图书馆v5.0书目检索系统 </title>
+<link type="text/css" rel="stylesheet" href="../tpl/css/style.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/mylib.css" />
+<link type="text/css" rel="stylesheet" href="../tpl/css/ui-lightness/jquery-ui-1.8.13.custom.css">
+<script  type="text/javascript" src="../tpl/js/jquery.1.7.1.min.js"></script>
+<script  type="text/javascript" src="../tpl/js/jquery-ui-1.8.13.custom.min.js"></script>
+<script  type="text/javascript" src="../tpl/js/highlighter.js"></script>
+</head>
+<body>
+<div id="header_opac">
+	<h1 class="header_opac_img">
+    <div class="header_opac_logo">
+    	南昌大学图书馆书目检索系统<br>
+        <p>Online Public Access Catalogue</p>
+        
+    </div>
+    </h1>
+    <div class="header_right header_right_top">
+      <p class="header_right_font">       </p>
+      <p style="margin-top:60px;" class="header_right_font">
+        <a href="../opac/book_cart.php">暂存书架(<span id="bookcartCount">0</span>)</a> | <font color="blue"></font> <a href="../reader/login.php" style="color:#ff0000;">登录</a></p>
+       </div>
+</div>
+<div id="menubar">
+    <ul id="menu_top">
+    		  	<li><a class="menu_top_on" style="color:#6C5B23;"	href="../opac/search.php" target="_self" >书目检索</a></li>
+	  		  	<li><a href="../top/top_lend.php" target="_self" >热门推荐</a></li>
+	  		  	<li><a href="../browse/cls_browsing.php" target="_self" >分类浏览</a></li>
+	  		  	<li><a href="../newbook/newbook_cls_browse.php" target="_self" >新书通报</a></li>
+	  		  	<li><a href="../peri/peri_nav_e.php" target="_self" >期刊导航</a></li>
+	  		  	<li><a href="../asord/asord_hist.php" target="_self" >读者荐购</a></li>
+	  		  	<li><a href="../shelf/curriculum.php" target="_self" >学科参考</a></li>
+	  		  	<li><a href="../info/info_guide.php" target="_self" >信息发布</a></li>
+	  		  	<li><a href="../reader/redr_info.php" target="_self" >我的图书馆</a></li>
+	  		  	         <div class="clear"></div>
+    </ul>
+</div>
+<div id="submenu">
+	  	  	<a href="../opac/search.php" target="_self" ><strong style="">简单检索</strong></a>	 	
+	  	
+	  	<a href="../opac/search_adv.php" target="_self" >全文检索</a>
+	  	
+	  	<a href="../opac/search_more.php" target="_self" >多字段检索</a>
+	        <div class="clear"></div>
+</div>
+
+<div id="mainbox">
+	<div id="container">
+        <fieldset><legend><img src="../tpl/images/s_f_1.jpg" width="190" height="18" /></legend><div style="text-indent:2em;margin:4px">
+<form action="openlink.php" method="get" name="f" onsubmit="return chkForm(this)" id="f">    
+      <div class="search_bgimg"><select class="option" name="strSearchType" size="1" style="width:100px;">
+                                <option value="title">题&nbsp;&nbsp;名</option>
+                                <option value="author">责任者</option>
+                                <option value="keyword">主题词</option>
+                                <option value="isbn">ISBN/ISSN</option>
+                                <option value="asordno">订购号</option>
+                                <option value="coden">分类号</option>
+                                <option value="callno">索书号</option>
+                                <option value="publisher">出版社</option>
+                                <option value="series">丛书名</option>
+                                <option value="tpinyin">题名拼音</option>
+                                <option value="apinyin">责任者拼音</option>
+                              </select>
+              <select class="option" name="match_flag" size="1" style="width:100px;">
+                <option value="forward">前方一致</option>
+                <option value="full">完全匹配</option>
+                <option value="any">任意匹配</option>
+              </select>
+              <input type="hidden" id="historyCount" name="historyCount" value="1" />
+		  <input style="width:34%;" type="text" size="45" name="strText" id="strText" value="" >
+			  <input type="submit" class="btn btn-primary" value="&nbsp;检&nbsp;索&nbsp;" size="30">
+              <input type="button" id="btnShowMore" onclick="showMore()" class="btn btn-success" value="更多限制" size="30">
+              <br>
+        <p><input type="radio" name="doctype" value="ALL" checked="checked" />
+            所有书刊
+            <input type="radio" name="doctype" value="01" />
+            中文图书
+            <input type="radio" name="doctype" value="02" />
+            西文图书
+            <input type="radio" name="doctype" value="11" />
+            中文期刊
+            <input type="radio" name="doctype" value="12" />
+            西文期刊　　　
+            
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="with_ebook" checked="checked"  />显示电子书刊
+                   </p>
+    					<div id="child1" class="childl">
+						<p><strong>显示方式：</strong><select class="option" name="displaypg" size="1" style="width:100px;">
+				            <option value="20">20条</option>
+				            <option value="30">30条</option>
+				            <option value="50">50条</option>
+				            <option value="100">100条</option>
+				          </select>    
+				          <input type="radio" name="showmode" value="list" checked="checked" />
+				          详细显示
+				          <input type="radio" name="showmode" value="table" />
+				          表格显示</p>
+                          <p><strong>排序方式：</strong><select class="option" name="sort" size="1" style="width:100px;">
+				          <option value="CATA_DATE">入藏日期</option>
+				          <option value="M_TITLE">题&nbsp;&nbsp;名</option>
+				          <option value="M_AUTHOR">责任者</option>
+				          <option value="M_CALL_NO">索书号</option>
+				          <option value="M_PUBLISHER">出版社</option>
+				          <option value="M_PUB_YEAR">出版日期</option>
+				        </select>
+				        <input type="radio" name="orderby" value="asc" />
+				        升序排列
+				        <input type="radio" name="orderby" value="desc" checked="checked" />
+				        降序排列</p>
+                        <p>                            <strong>检索范围：</strong><select class="option" id="location"  name="dept" size="1" style="width:100px;">
+                                <option value="ALL">所有校区</option>
+                                                                                      <option value="00">总馆</option>
+                                                          <option value="01">前湖校区</option>
+                                                          <option value="02">东湖校区</option>
+                                                          <option value="03">青山湖北区</option>
+                                                          <option value="05">青山湖南区</option>
+                                                          <option value="06">前湖医学</option>
+                                                          <option value="07">院系资料室</option>
+                                                         </select>
+                        </p>
+                        </div>
+                       <p><div id="hottag" style="padding:10px 0;"><strong>热门检索：</strong><span id="topten"></span></div><br />　　<a href="top100.php">查看30天内的热门检索词</a></p>
+    	</div></form>
+</div></fieldset>
+  </div>
+ 
+ <script src="../tpl/js/swfobject.js"></script>
+    <div id="search_container">
+   	  <div id="search_container_left">
+       	<h3>热门检索词</h3>
+          <p><span id="swf"></span></p>
+        </div>
+		<span id="top_lend_shelf"></span>
+    </div> 
+    <div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+<!--
+	var bShow = false;
+	
+	function input_me(str){
+		$("#strText").val(str);
+		$("#historyCount").val("0"); 
+		document.f.submit(); 
+	}
+
+	function showMore(){
+		bShow = !bShow;
+		if(bShow){
+			$("#btnShowMore").val("取消限制");
+			$("#location").val('ALL');
+		}else{
+			$("#btnShowMore").val("更多限制");
+		}
+		$("#child1").toggle(bShow);
+	}
+	
+ 	$(function(){
+		$("#topten").load("ajax_topten.php");
+		$("#top_lend_shelf").load("ajax_top_lend_shelf.php");
+		$.get("ajax_topkeywords.php",function(taglist){
+			var attributes = {'allowScriptAccess':'always','wmode':'transparent','id':'swf'};
+		    var flashvars = { 'mode' : 'tags', 'distr' : 'false', 'tcolor' : '0x00ff00', 'hcolor' : '0x000000',  'speed' : 50 };
+		    flashvars["tagcloud"] = "<tags>" + taglist + "</tags>";
+		    swfobject.embedSWF("../tpl/opac/tagcloud.swf", "swf", 250, 200, '10', '', flashvars, {}, attributes);
+		});
+		
+		$("#child1").hide();
+		$("#location").val('ALL');
+		
+	});
+
+    function chkForm(theForm){
+      if (theForm.strText.value=="") {
+        alert("［查询内容］不能为空");
+        theForm.strText.focus();
+        return (false);
+      }
+    }
+    
+</script> 
+
+<div id="footer"><div id="copy"><p> 南昌大学图书馆&nbsp;&nbsp; OPAC v5.0.15.08.27  &nbsp;&nbsp;</p><p>&copy; 1999-2014 <a target="_blank" href="http://www.libsys.com.cn">Jiangsu Huiwen Software Ltd. 江苏汇文软件有限公司</a></p></div></div></body></html>
